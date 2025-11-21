@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KANGYE MUSIC LIBRARY</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+    :root {
+      --primary: linear-gradient(45deg, #ff4d4d, #ff9900);
+      --secondary: #2d2d2d;
+      --accent: #1db954;
+      --dark: #121212;
+      --light: #ffffff;
+      --text-secondary: #aaaaaa;
+    }
+
+    body {
+      background-color: var(--dark);
+      color: var(--light);
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      background: var(--secondary);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    .header nav {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .header nav a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Search Bar */
+    .search-bar {
+      padding: 0.5rem;
+      border-radius: 25px;
+      border: 2px solid var(--accent);
+      color: var(--light);
+      background: var(--secondary);
+      width: 250px;
+      transition: all 0.3s ease;
+    }
+
+    .search-bar:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+
+    /* Home Page Styles */
+    .home-page {
+      padding: 2rem 5%;
+      margin-top: 80px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: url('images/ai-generated-7872856.jpg') no-repeat center center/cover;
+      padding: 6rem 2rem;
+      border-radius: 15px;
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: var(--light);
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .btn {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--light);
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Music Categories */
+    .categories-section {
+      margin-top: 3rem;
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .category-card {
+      background: var(--secondary);
+      border-radius: 10px;
+      text-align: center;
+      padding: 1rem;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      background: var(--accent);
+    }
+
+    .category-card i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .category-card h4 {
+      font-size: 1.5rem;
+      color: var(--light);
+      margin-bottom: 1rem;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      margin-top: 4rem;
+      text-align: center;
+    }
+
+    .contact-info {
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .contact-info a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* Trending Section */
+    .trending-section {
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .trending-carousel {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      gap: 2rem;
+      padding-bottom: 1rem;
+      scroll-snap-type: x mandatory;
+    }
+
+    .trending-track {
+      flex: 0 0 300px;
+      background: var(--secondary);
+      border-radius: 10px;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    .trending-track img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .track-info {
+      padding: 1rem;
+    }
+
+    .track-info h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .track-info p {
+      color: var(--text-secondary);
+    }
+
+    .play-btn {
+      background: var(--accent);
+      color: var(--light);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
+    .play-btn:hover {
+      background: #1ed760;
+    }
+
+    /* About Us Section */
+    .about-section {
+      margin-top: 4rem;
+      padding: 2rem 5%;
+      background: var(--secondary);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .about-section h2 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .about-section p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Light Mode Styles */
+    .light-mode {
+      --dark: #ffffff;
+      --light: #000000;
+      --secondary: #f0f0f0;
+    }
+
+    /* Theme Toggle Button */
+    #theme-toggle {
+      background: var(--primary);
+      color: var(--light);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    #theme-toggle:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <a href="cyborg-8534055.png"><img src="cyborg-8534055.png" alt="Kangyestyles Music Logo"></a>
+    </div>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="#categories">Categories</a>
+      <a href="Trending.html">Trending</a>
+      <a href="#store">Store</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <input type="text" class="search-bar" placeholder="Search for music..." />
+    </nav>
+    <button id="theme-toggle">Toggle Theme</button>
+  </header>
+
+  <!-- Home Page Section -->
+  <section class="home-page">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Welcome to KANGYESTYLES MUSIC LIBRARY</h1>
+        <p class="hero-subtitle">Your home of entertainment</p>
+        <div class="cta-buttons">
+          <a href="explore.html" class="btn btn-primary">Explore Music</a>
+          <a href="login.html" class="btn btn-secondary">Join Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Music Categories -->
+    <div id="categories" class="categories-section">
+      <h2 class="section-title">Select Your Favorite Music Categories</h2>
+      <div class="categories-grid">
+        <!-- categories list here -->
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="contact-section">
+      <h2 class="section-title">Contact Us</h2>
+      <p class="contact-info">
+        Email us at: <a href="mailto:contact@kangyestylesmusiclibrary.com">contact@kangyestylesmusiclibrary.com</a><br>
+        Call us at: +256 761337823
+      </p>
+    </div>
+
+    <!-- Trending Section -->
+    <div id="trending" class="trending-section">
+      <h2 class="section-title">Trending Now</h2>
+      <div class="trending-carousel">
+        <!-- trending items here -->
+      </div>
+    </div>
+
+    <!--  Music Store Section -->
+    <section id="store" style="text-align:center; padding:40px; background:#221717; color:white;">
+      <h2 style="margin-bottom:20px;">Music Store</h2>
+      <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:20px;">
+        <!-- Product 1 -->
+        <div style="background:#1e1e1e; padding:15px; border-radius:10px; width:220px;">
+          <img src="images/ai-generated-7872856.jpg" alt="Album 1" style="width:100%; border-radius:10px;">
+          <h4>Dream Waves</h4>
+          <p>DJ Harmony</p>
+          <p><b>UGX 5OK</b></p>
+          <a href="#" style="background:#1a5f1d; color:white; padding:8px 15px; border-radius:20px; text-decoration:none;">Buy Now</a>
+        </div>
+
+        <!-- Product 2 -->
+        <div style="background:#1e1e1e; padding:15px; border-radius:10px; width:220px;">
+          <img src="images/album2.jpg" alt="Album 2" style="width:100%; border-radius:10px;">
+          <h4>Acoustic Vibes</h4>
+          <p>Sarah Keys</p>
+          <p><b>UGX 100K</b></p>
+          <a href="#" style="background:#1db954; color:white; padding:8px 15px; border-radius:20px; text-decoration:none;">Buy Now</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <div id="about" class="about-section">
+      <h2>About Us</h2>
+      <p>
+        At KANGYESTYLES MUSIC LIBRARY, we are passionate about bringing together music lovers from all walks of life. Our platform is dedicated to showcasing a diverse range of musical genres and artists, from timeless classics to the latest hits. We believe in the transformative power of music and strive to create a community where every listener can find something that speaks to their soul. Join us on this musical journey and discover a world of sound, passion, and inspiration.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    // JavaScript for theme toggle
+    document.getElementById("theme-toggle").addEventListener("click", function() {
+      document.body.classList.toggle("light-mode");
+    });
+  </script>
+</body>
+</html>
+
